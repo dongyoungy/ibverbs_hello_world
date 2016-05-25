@@ -7,7 +7,7 @@ void Process::set_as_client(){
 
 
 void Process::set_logfilename(char *str){
-	sprintf(logfilename, str);
+	sprintf(logfilename, "%s", str);
 }
 void Process::get_self_address(){
 	memsetzero(&address);
@@ -18,7 +18,7 @@ void Process::get_self_address(){
 void Process::get_server_address_from_string(){
 	address.sin_family = AF_INET;
 	address.sin_port = htons(DEFAULT_PORT);
-	inet_pton(AF_INET, &this->ipstring[0], &address.sin_addr); 
+	inet_pton(AF_INET, &this->ipstring[0], &address.sin_addr);
 }
 
 void Process::set_ip_string(char *str){
@@ -42,7 +42,7 @@ int Process::set_message_size(unsigned int n){
 	if(n < 8){
 		die("By internal design message less than 8 bytes are not allowed.\n");
 	}
-	
+
 	this->message.size = n;
 	this->message.x = new char[n];
 	std::cout<<"Setting message size and allocating memory "<<n<<std::endl;
